@@ -4,6 +4,7 @@
 #include<fstream>
 #include<conio.h>
 #include "classes.h"
+#include<cmath>
 using namespace std;
 
 void wczytaj(player& P, settings& S, view& map, game& GameHub);
