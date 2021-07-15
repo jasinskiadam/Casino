@@ -132,7 +132,7 @@ void view::movePlayer(game GameList, player& P, settings& S)
 				else if (view::checkMovePlayer('E') == 4)
 				{
 
-					GameList.startZaklady(P);
+					GameList.startBet(P);
 					system("pause");
 				}
 				else if (view::checkMovePlayer('E') == 5)
@@ -201,7 +201,7 @@ void view::movePlayer(game GameList, player& P, settings& S)
 				else if (view::checkMovePlayer('E') == 4)
 				{
 
-					GameList.startZaklady(P);
+					GameList.startBet(P);
 					system("pause");
 				}
 				else if (view::checkMovePlayer('E') == 5)
@@ -404,7 +404,7 @@ void game::nazwa(int x) {
 	}
 }
 
-int game::losuj() {
+int game::draw() {
 	int random = (rand() % 6) + 1;
 	return random;
 }
@@ -584,7 +584,7 @@ int game::startPoker(player& P)
 	srand(time(NULL));
 	int gracz[5];
 	int bot[5];
-	int stawka, runda = 1, gracz_reka, bot_reka;
+	int stake, runda = 1, gracz_reka, bot_reka;
 	int gracz_pkt = 0, bot_pkt = 0;
 
 	cout << "Czy chcesz wyswietlic zasady?(t/n) ";
@@ -605,9 +605,9 @@ int game::startPoker(player& P)
 	system("CLS");
 
 	cout << "Wybierz stawke: $";
-	cin >> stawka;
+	cin >> stake;
 	system("CLS");
-	cout << "Stawka: $" << stawka << endl << endl;
+	cout << "Stawka: $" << stake << endl << endl;
 	system("pause");
 
 	while (gracz_pkt != 2 && bot_pkt != 2) {
@@ -617,8 +617,8 @@ int game::startPoker(player& P)
 		system("CLS");
 
 		for (int i = 0; i < 5; i++) {
-			gracz[i] = losuj();
-			bot[i] = losuj();
+			gracz[i] = draw();
+			bot[i] = draw();
 		}
 
 		cout << "Wylosowano:\n";
@@ -643,14 +643,14 @@ int game::startPoker(player& P)
 			else {
 				system("CLS");
 				if (a != 0) {
-					gracz[a - 1] = losuj();
+					gracz[a - 1] = draw();
 					Sleep(1000);
 					cout << "Ponowny rzut koscia " << a << ".:\n";
 					Sleep(1000);
 					rzut(gracz[a - 1]);
 				}
 				if (b != 0) {
-					gracz[b - 1] = losuj();
+					gracz[b - 1] = draw();
 					Sleep(1000);
 					cout << "\nPonowny rzut koscia " << b << ".:\n";
 					Sleep(1000);
@@ -706,13 +706,13 @@ int game::startPoker(player& P)
 
 	system("CLS");
 	if (gracz_pkt == 2) {
-		wallet = wallet + stawka * (2 + P.mnoznik);
+		wallet = wallet + stake * (2 + P.multiplier);
 		P.updatePlayer();
 		P.updateWallet(wallet);
 		cout << "Koniec gry. Wygrywasz $" << wallet;
 	}
 	if (bot_pkt == 2) {
-		wallet = wallet - stawka * P.mnoznik;
+		wallet = wallet - stake * P.multiplier;
 		cout << "Koniec gry. Przegrywasz $" << wallet;
 		P.updateWallet(wallet);
 	}
@@ -1024,8 +1024,6 @@ void game::initDraw()
 
 }
 
-
-
 void game::displayRoulette(int winNumber)
 {
 	// czarny - parzyste -  15
@@ -1053,21 +1051,15 @@ void game::displayRoulette(int winNumber)
 			tempNum = 36 - z;
 			for (a = 36 - z; a <= 36 && o <= 12; a++, o++)
 			{
-
 				if (checkedNumber <= 7) checkedNumber++;
-
 				cout << setw(2);
 				setColor(a, checkedNumber);
 				cout << a;
 				SetConsoleTextAttribute(hConsole, 7);
 				cout << " ";
-
-
-
 			}
 			if (o < 13)
 			{
-
 				pomStart = 36 - z;
 				for (a = 36 - pomStart; a < 12; a++)
 				{
@@ -1080,7 +1072,6 @@ void game::displayRoulette(int winNumber)
 					{
 						pomStart = a - z + 1;
 					}
-
 					cout << " ";
 				}
 			}
@@ -1092,12 +1083,9 @@ void game::displayRoulette(int winNumber)
 				{
 					pomStart = a % 36;
 				}
-
 			}
 
 			cout << endl;
-
-
 
 			for (int i = pomStart, j = pomStart + 23; i <= pomStart + 6 && j >= pomStart + 17; i++, j--)
 			{
@@ -1313,28 +1301,28 @@ void game::startSlotMachine(player& P)
 
 /*Zaklady */
 
-int game::losujTeam()
+int game::drawTeam()
 {
 	int x = (rand() % 20) + 1;
 	return x;
 }
 
-string game::druzyna(int nr)
+string game::team(int nr)
 {
 	string names[20] = { "Milan", "Inter Mediolan", "Roma", "Napoli", "Juventus", "Sassuolo", "Atalanta", "Hellas Werona","Lazio","Benevento","Sampdoria","Bologna","Udinese","Fiorentina","Cagliari","Parma","Torino","Spezia","Genoa","Crotone" };
 	return names[nr];
 }
 
-int game::losuj_wynik()
+int game::drawResult()
 {
 	int x = rand() % 2;
 	return x;
 }
 
-int game::wynik(int bet)
+int game::result(int bet)
 {
-	int mecz = losuj_wynik();
-	if (bet == mecz) {
+	int match = drawResult();
+	if (bet == match) {
 		return 1;
 	}
 	else {
@@ -1342,20 +1330,20 @@ int game::wynik(int bet)
 	}
 }
 
-void game::startZaklady(player& P)
+void game::startBet(player& P)
 {
 	srand(time(NULL));
 	money(P);
-	int nr_druzyn[20];
+	int teamNumber[20];
 	for (int i = 1; i <= 20; i++) {
-		nr_druzyn[i - 1] = i;
+		teamNumber[i - 1] = i;
 	}
 	string t1_name, t2_name, t3_name, t1_opp_name, t2_opp_name, t3_opp_name;
 	int t1, t2, t3, t1_opp, t2_opp, t3_opp;
 	int bet1, bet2, bet3;
 	int winorlose;
-	int ile_meczy;
-	int stawka;
+	int matchNumber;
+	int stake;
 
 	cout << "==========================================================\n";
 	cout << "WYBIERZ ILE MECZY CHCESZ OBSTAWIC\n";
@@ -1365,31 +1353,31 @@ void game::startZaklady(player& P)
 	cout << "(aby wygrac wszystkie obstawione mecze musza byc trafione)\n";
 	cout << "==========================================================\n";
 	cout << "wybor:";
-	cin >> ile_meczy;
+	cin >> matchNumber;
 	cout << "podaj stawke: $";
-	cin >> stawka;
+	cin >> stake;
 	system("CLS");
 	winorlose = 1;
 
-	switch (ile_meczy) {
+	switch (matchNumber) {
 	case 1:
-		t1 = losuj();
-		t1_opp = losuj();
+		t1 = draw();
+		t1_opp = draw();
 		while (t1_opp == t1) {
-			t1_opp = losuj();
+			t1_opp = draw();
 		}
-		t1_name = druzyna(t1);
-		t1_opp_name = druzyna(t1_opp);
+		t1_name = team(t1);
+		t1_opp_name = team(t1_opp);
 		cout << "MECZ 1: druzyna nr " << t1 << ". " << t1_name << " gra z druzyna nr " << t1_opp << ". " << t1_opp_name << endl;
 		cout << "[1]-wygrana   [0]-przegrana\n";
 		cout << "Podaj przewidywany wynik dla pierwszego meczu: ";
 		cin >> bet1;
-		winorlose = wynik(bet1);
+		winorlose = result(bet1);
 		if (winorlose == 1) {
 			cout << "mecz trafiony!\n";
 			cout << "WYGRANA\n";
 			P.updatePlayer();
-			cout << "wygrywasz $" << stawka * 2;
+			cout << "wygrywasz $" << stake * 2;
 		}
 		else if (winorlose == 0) {
 			cout << "mecz nietrafiony!\n";
@@ -1397,23 +1385,23 @@ void game::startZaklady(player& P)
 		}
 		break;
 	case 2:
-		t1 = losuj();
-		t1_opp = losuj();
-		t2 = losuj();
-		t2_opp = losuj();
+		t1 = draw();
+		t1_opp = draw();
+		t2 = draw();
+		t2_opp = draw();
 		while (t1_opp == t1) {
-			t1_opp = losuj();
+			t1_opp = draw();
 		}
 		while (t2 == t1_opp || t2 == t1) {
-			t2 = losuj();
+			t2 = draw();
 		}
 		while (t2_opp == t2 || t2_opp == t1_opp || t2_opp == t1) {
-			t2_opp = losuj();
+			t2_opp = draw();
 		}
-		t1_name = druzyna(t1);
-		t1_opp_name = druzyna(t1_opp);
-		t2_name = druzyna(t2);
-		t2_opp_name = druzyna(t2_opp);
+		t1_name = team(t1);
+		t1_opp_name = team(t1_opp);
+		t2_name = team(t2);
+		t2_opp_name = team(t2_opp);
 		cout << "MECZ 1: druzyna nr " << t1 << ". " << t1_name << " gra z druzyna nr " << t1_opp << ". " << t1_opp_name << endl;
 		cout << "MECZ 2: druzyna nr " << t2 << ". " << t2_name << " gra z druzyna nr " << t2_opp << ". " << t2_opp_name << endl;
 		cout << "[1]-wygrana   [0]-przegrana\n";
@@ -1421,14 +1409,14 @@ void game::startZaklady(player& P)
 		cin >> bet1;
 		cout << "Podaj przewidywany wynik dla drugiego meczu: ";
 		cin >> bet2;
-		winorlose = wynik(bet1);
+		winorlose = result(bet1);
 		if (winorlose == 1) {
 			cout << "pierwszy mecz trafiony!\n";
-			winorlose = wynik(bet2);
+			winorlose = result(bet2);
 			if (winorlose == 1) {
 				cout << "drugi mecz trafiony!\n";
 				cout << "WYGRANA\n";
-				cout << "wygrywasz $" << stawka * 4;
+				cout << "wygrywasz $" << stake * 4;
 			}
 			else if (winorlose == 0) {
 				cout << "drugi mecz nietrafiony!\n";
@@ -1442,33 +1430,33 @@ void game::startZaklady(player& P)
 		}
 		break;
 	case 3:
-		t1 = losuj();
-		t1_opp = losuj();
-		t2 = losuj();
-		t2_opp = losuj();
-		t3 = losuj();
-		t3_opp = losuj();
+		t1 = draw();
+		t1_opp = draw();
+		t2 = draw();
+		t2_opp = draw();
+		t3 = draw();
+		t3_opp = draw();
 		while (t1_opp == t1) {
-			t1_opp = losuj();
+			t1_opp = draw();
 		}
 		while (t2 == t1_opp || t2 == t1) {
-			t2 = losuj();
+			t2 = draw();
 		}
 		while (t2_opp == t2 || t2_opp == t1_opp || t2_opp == t1) {
-			t2_opp = losuj();
+			t2_opp = draw();
 		}
 		while (t3 == t2_opp || t3 == t2 || t3 == t1_opp || t3 == t1) {
-			t3 = losuj();
+			t3 = draw();
 		}
 		while (t3_opp == t3 || t3_opp == t2_opp || t3_opp == t2 || t3_opp == t1_opp || t3_opp == t1) {
-			t3_opp = losuj();
+			t3_opp = draw();
 		}
-		t1_name = druzyna(t1);
-		t1_opp_name = druzyna(t1_opp);
-		t2_name = druzyna(t2);
-		t2_opp_name = druzyna(t2_opp);
-		t3_name = druzyna(t3);
-		t3_opp_name = druzyna(t3_opp);
+		t1_name = team(t1);
+		t1_opp_name = team(t1_opp);
+		t2_name = team(t2);
+		t2_opp_name = team(t2_opp);
+		t3_name = team(t3);
+		t3_opp_name = team(t3_opp);
 		cout << "MECZ 1: druzyna nr " << t1 << ". " << t1_name << " gra z druzyna nr " << t1_opp << ". " << t1_opp_name << endl;
 		cout << "MECZ 2: druzyna nr " << t2 << ". " << t2_name << " gra z druzyna nr " << t2_opp << ". " << t2_opp_name << endl;
 		cout << "MECZ 3: druzyna nr " << t3 << ". " << t3_name << " gra z druzyna nr " << t3_opp << ". " << t3_opp_name << endl;
@@ -1479,18 +1467,18 @@ void game::startZaklady(player& P)
 		cin >> bet2;
 		cout << "Podaj przewidywany wynik dla trzeciego meczu: ";
 		cin >> bet3;
-		winorlose = wynik(bet1);
+		winorlose = result(bet1);
 		if (winorlose == 1) {
 			cout << "pierwszy mecz trafiony!\n";
-			winorlose = wynik(bet2);
+			winorlose = result(bet2);
 			if (winorlose == 1) {
 				cout << "drugi mecz trafiony!\n";
-				winorlose = wynik(bet3);
+				winorlose = result(bet3);
 				if (winorlose == 1) {
 					cout << "trzeci mecz trafiony!\n";
 					cout << "WYGRANA\n";
-					cout << "wygrywasz $" << stawka * 8;
-					P.wallet1 += stawka * 8;
+					cout << "wygrywasz $" << stake * 8;
+					P.wallet1 += stake * 8;
 				}
 				else if (winorlose == 0) {
 					cout << "trzeci mecz nietrafiony!\n";
@@ -1517,7 +1505,7 @@ void game::startZaklady(player& P)
 	system("pause");
 }
 
-void game::sterowanie(player& P, settings& S)
+void game::manipulation(player& P, settings& S)
 {
 	system("CLS");
 	cout << "========================================\n"
@@ -1541,12 +1529,12 @@ void game::sterowanie(player& P, settings& S)
 	default:
 		cout << "\nPodano bledna wartosc, sprobuj jeszcze raz\n\n";
 		system("pause");
-		sterowanie(P, S);
+		manipulation(P, S);
 		break;
 	}
 }
 
-void game::zapisz(player& P, settings& S)
+void game::save(player& P, settings& S)
 {
 	system("CLS");
 	string nameSaved;
@@ -1562,15 +1550,13 @@ void game::zapisz(player& P, settings& S)
 		cout << "\r";
 	}
 	fstream file("savedGames.txt", ios::app);
-	if (file << nameSaved << " " << P.name << " " << P.wallet1 << " " << P.level << " " << P.mnoznik << " " << P.winNumber << " " << S.controlMode << endl) cout << "\nGra zostala zapisana!\n\n";
+	if (file << nameSaved << " " << P.name << " " << P.wallet1 << " " << P.level << " " << P.multiplier << " " << P.winNumber << " " << S.controlMode << endl) cout << "\nGra zostala zapisana!\n\n";
 	else cout << "\n Wystapil problem z zapisem gry :C \n\n";
 	file.close();
 
 	system("pause");
 	menu(P, S);
 }
-
-
 
 void game::drinki(player& P, settings& S)
 {
@@ -1592,7 +1578,7 @@ void game::drinki(player& P, settings& S)
 		if (P.checkWallet(1000))
 		{
 			cout << "\nZakupiono drink: Johnny Silverhand; wszystkie wygrane zwiekszaja sie dwukrotnie\n\n";
-			P.mnoznik = 2;
+			P.multiplier = 2;
 		}
 		else
 			cout << "Nie masz na tyle pieniedzy\n";
@@ -1603,7 +1589,7 @@ void game::drinki(player& P, settings& S)
 		if (P.checkWallet(500))
 		{
 			cout << "\nZakupiono drink: Jackie Welles; wszystkie wygrane zwiekszaja sie o polowe\n\n";
-			P.mnoznik = 1.5;
+			P.multiplier = 1.5;
 		}
 		else
 			cout << "Nie masz na tyle pieniedzy\n";
@@ -1614,7 +1600,7 @@ void game::drinki(player& P, settings& S)
 		if (P.checkWallet(250))
 		{
 			cout << "\nZakupiono drink: Adam Smasher; wszystkie wygrane zwiekszaja sie o 1/4\n\n";
-			P.mnoznik = 1.25;
+			P.multiplier = 1.25;
 		}
 		else
 			cout << "Nie masz na tyle pieniedzy\n";
@@ -1624,7 +1610,7 @@ void game::drinki(player& P, settings& S)
 		if (P.checkWallet(50))
 		{
 			cout << "\nZakupiono drink: Panam Palmer; wszystkie wygrane zwiekszaja o 5 procent\n\n";
-			P.mnoznik = 1.05;
+			P.multiplier = 1.05;
 		}
 		else
 			cout << "Nie masz na tyle pieniedzy\n";
@@ -1659,10 +1645,10 @@ void game::menu(player& P, settings& S)
 	cin >> x;
 	switch (x) {
 	case 1:
-		sterowanie(P, S);
+		manipulation(P, S);
 		break;
 	case 2:
-		zapisz(P, S);
+		save(P, S);
 		break;
 	case 3:
 		drinki(P, S);

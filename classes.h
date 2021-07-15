@@ -2,14 +2,10 @@
 #include<string>
 using  std::string;
 
-
-
 class settings
 {
 	/* Sterowanie, zmiana has³a */
 private:
-
-
 
 public:
 	bool controlMode;
@@ -17,7 +13,6 @@ public:
 	{
 		this->controlMode = controlMode;
 	}
-
 };
 
 class player
@@ -26,25 +21,23 @@ class player
 		Stan konta gracza, przelicznik na wygran¹ i przegran¹
 	*/
 public:
-	float mnoznik;
+	float multiplier;
 	int wallet1;
 	int winNumber;
 	int level;
 	string name;
-	player(int wallet, string name, float mnoznik, int level, int winNumber)
+	player(int wallet, string name, float multiplier, int level, int winNumber)
 	{
 		this->wallet1 = wallet;
 		this->name = name;
-		this->mnoznik = mnoznik;
+		this->multiplier = multiplier;
 		this->level = level;
 		this->winNumber = winNumber;
 	}
 
 	bool updateWallet(int wallet);
-
 	bool checkWallet(int cost);
 	void updatePlayer();
-
 };
 
 class game
@@ -60,7 +53,7 @@ public:
 		this->number = number;
 	}
 
-	///* Ogolne */
+	/* Ogolne */
 	void money(player& obj);
 
 	/* Poker */
@@ -70,7 +63,7 @@ public:
 	void kosc4();
 	void kosc5();
 	void kosc6();
-	int losuj();
+	int draw();
 	void rzut(int);
 	int uklad(int[]);
 	void zasady();
@@ -91,17 +84,16 @@ public:
 	void startSlotMachine(player& P);
 
 	/* Bet */
-
-	int losujTeam();
-	int losuj_wynik();
-	string druzyna(int);
-	int wynik(int);
-	void startZaklady(player& P);
+	int drawTeam();
+	int drawResult();
+	string team(int);
+	int result(int);
+	void startBet(player& P);
 
 	/* Bar */
 	void menu(player& P, settings& S);
-	void sterowanie(player& P, settings& S);
-	void zapisz(player& P, settings& S);
+	void manipulation(player& P, settings& S);
+	void save(player& P, settings& S);
 	void drinki(player& P, settings& S);
 	void startBar(player& P, settings& S);
 };
@@ -152,19 +144,13 @@ public:
 	void bye(player& P);
 };
 
-
 class data
 {
-	/*
-		Zapis gry
-	*/
-
 private:
 
 public:
 	int nrSave;
 	bool saveToFile(player& P, settings& S, int index, string& nameSaved);
-
 };
 
 
