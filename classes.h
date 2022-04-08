@@ -66,7 +66,7 @@ public:
 	int draw();
 	void diceThrow(int);
 	int diceLayout(int[]);
-	void zasady();
+	void pokerRules();
 	void diceResult(int);
 	int startPoker(player& P);
 
@@ -94,7 +94,7 @@ public:
 	void menu(player& P, settings& S);
 	void manipulation(player& P, settings& S);
 	void save(player& P, settings& S);
-	void drinki(player& P, settings& S);
+	void drinks(player& P, settings& S);
 	void startBar(player& P, settings& S);
 };
 

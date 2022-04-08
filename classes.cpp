@@ -487,7 +487,7 @@ void game::dice6() {
 	cout << "\n# # # # # # # # #\n#               #\n#   @       @   #\n#               #\n#   @       @   #\n#               #\n#   @       @   #\n#               #\n# # # # # # # # #\n";
 }
 
-void game::zasady() {
+void game::pokerRules() {
 	cout << "KOSCIANY POKER ZASADY:\n1. wybranie stawki\n2. rzut piecioma koscmi\n3. mozliwosc ponownego rzutu 1 lub 2 koscmi\n4. porownanie ukladow z przeciwnikiem\n5. wygrana dwoch rund oznacza wygrana pieniezna\n\n";
 	system("pause");
 	system("CLS");
@@ -590,7 +590,7 @@ int game::startPoker(player& P)
 	wannaPokerRules = getchar();
 	if (wannaPokerRules == 't') {
 		system("CLS");
-		zasady();
+		pokerRules();
 	}
 	system("CLS");
 
@@ -1293,7 +1293,7 @@ void game::startSlotMachine(player& P)
 	system("pause");
 }
 
-/*Zaklady */
+/* Zaklady */
 
 int game::drawTeam()
 {
@@ -1499,6 +1499,8 @@ void game::startBet(player& P)
 	system("pause");
 }
 
+/* Sterowanie */
+
 void game::manipulation(player& P, settings& S)
 {
 	system("CLS");
@@ -1528,6 +1530,8 @@ void game::manipulation(player& P, settings& S)
 	}
 }
 
+/* Zapis */
+
 void game::save(player& P, settings& S)
 {
 	system("CLS");
@@ -1552,7 +1556,9 @@ void game::save(player& P, settings& S)
 	menu(P, S);
 }
 
-void game::drinki(player& P, settings& S)
+/* Bar */
+
+void game::drinks(player& P, settings& S)
 {
 	system("CLS");
 	cout << "==========================================================================\n"
@@ -1616,7 +1622,7 @@ void game::drinki(player& P, settings& S)
 	default:
 		cout << "\nPodano bledna wartosc, sprobuj jeszcze raz\n\n";
 		system("pause");
-		drinki(P, S);
+		drinks(P, S);
 		break;
 	}
 }
@@ -1645,7 +1651,7 @@ void game::menu(player& P, settings& S)
 		save(P, S);
 		break;
 	case 3:
-		drinki(P, S);
+		drinks(P, S);
 		break;
 	case 4:
 		system("cls");
