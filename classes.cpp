@@ -356,8 +356,6 @@ bool player::checkWallet(int cost)
 		return false;
 }
 
-
-
 void player::updatePlayer()
 {
 	winNumber++;
@@ -375,7 +373,7 @@ void game::money(player& obj)
 }
 
 /* Poker */
-void game::nazwa(int x) {
+void game::diceResult(int x) {
 	switch (x) {
 	case 0:
 		cout << "NIC";
@@ -409,30 +407,30 @@ int game::draw() {
 	return random;
 }
 
-void game::rzut(int x) {
+void game::diceThrow(int x) {
 	switch (x) {
 	case 1:
-		kosc1();
+		dice1();
 		break;
 	case 2:
-		kosc2();
+		dice2();
 		break;
 	case 3:
-		kosc3();
+		dice3();
 		break;
 	case 4:
-		kosc4();
+		dice4();
 		break;
 	case 5:
-		kosc5();
+		dice5();
 		break;
 	case 6:
-		kosc6();
+		dice6();
 		break;
 	}
 }
 
-int game::uklad(int tab[5]) {
+int game::diceLayout(int tab[5]) {
 	for (int i = 0; i < 5; i++) {
 		for (int j = 1; j < 5 - i; j++)
 			if (tab[j - 1] > tab[j])
@@ -465,27 +463,27 @@ int game::uklad(int tab[5]) {
 	}
 }
 
-void game::kosc1() {
+void game::dice1() {
 	cout << "\n# # # # # # # # #\n#               #\n#               #\n#               #\n#       @       #\n#               #\n#               #\n#               #\n# # # # # # # # #\n";
 }
 
-void game::kosc2() {
+void game::dice2() {
 	cout << "\n# # # # # # # # #\n#               #\n#               #\n#    @          #\n#               #\n#          @    #\n#               #\n#               #\n# # # # # # # # #\n";
 }
 
-void game::kosc3() {
+void game::dice3() {
 	cout << "\n# # # # # # # # #\n#               #\n#   @           #\n#               #\n#       @       #\n#               #\n#           @   #\n#               #\n# # # # # # # # #\n";
 }
 
-void game::kosc4() {
+void game::dice4() {
 	cout << "\n# # # # # # # # #\n#               #\n#   @       @   #\n#               #\n#               #\n#               #\n#   @       @   #\n#               #\n# # # # # # # # #\n";
 }
 
-void game::kosc5() {
+void game::dice5() {
 	cout << "\n# # # # # # # # #\n#               #\n#   @       @   #\n#               #\n#       @       #\n#               #\n#   @       @   #\n#               #\n# # # # # # # # #\n";
 }
 
-void game::kosc6() {
+void game::dice6() {
 	cout << "\n# # # # # # # # #\n#               #\n#   @       @   #\n#               #\n#   @       @   #\n#               #\n#   @       @   #\n#               #\n# # # # # # # # #\n";
 }
 
@@ -498,80 +496,80 @@ void game::zasady() {
 	system("CLS");
 	cout << "1. POKER (5 razy taka sama liczba oczek)\n";
 	for (int i = 0; i < 5; i++) {
-		kosc5();
+		dice5();
 	}
 	cout << endl;
 	system("pause");
 	system("CLS");
 	cout << "2. KARETA (4 razy taka sama liczba oczek)\n";
 	for (int i = 0; i < 4; i++) {
-		kosc4();
+		dice4();
 	}
-	kosc1();
+	dice1();
 	cout << endl;
 	system("pause");
 	system("CLS");
 	cout << "3. FULL (3 razy taka sama liczba oczek i 2 razy inna taka sama liczba oczek)\n";
 	for (int i = 0; i < 3; i++) {
-		kosc3();
+		dice3();
 	}
 	for (int i = 0; i < 2; i++) {
-		kosc2();
+		dice2();
 	}
 	cout << endl;
 	system("pause");
 	system("CLS");
 	cout << "4. STRIT (5 kolejnych liczb oczek):\n";
-	kosc1();
-	kosc2();
-	kosc3();
-	kosc4();
-	kosc5();
+	dice1();
+	dice2();
+	dice3();
+	dice4();
+	dice5();
 	cout << endl;
 	system("pause");
 	system("CLS");
 	cout << "lub:\n";
-	kosc2();
-	kosc3();
-	kosc4();
-	kosc5();
-	kosc6();
+	dice2();
+	dice3();
+	dice4();
+	dice5();
+	dice6();
 	cout << endl;
 	system("pause");
 	system("CLS");
 	cout << "5. TROJKA (3 razy taka sama liczba oczek):\n";
 	for (int i = 0; i < 3; i++) {
-		kosc3();
+		dice3();
 	}
-	kosc1();
-	kosc2();
+	dice1();
+	dice2();
 	cout << endl;
 	system("pause");
 	system("CLS");
 	cout << "6. DWIE PARY (2 razy taka sama liczba oczek dla dwoch roznych liczb):\n";
-	kosc6();
-	kosc6();
-	kosc4();
-	kosc4();
-	kosc1();
+	dice6();
+	dice6();
+	dice4();
+	dice4();
+	dice1();
 	cout << endl;
 	system("pause");
 	system("CLS");
 	cout << "7. PARA (2 razy taka sama liczba oczek):\n";
-	kosc5();
-	kosc5();
-	kosc1();
-	kosc2();
-	kosc3();
+	dice5();
+	dice5();
+	dice1();
+	dice2();
+	dice3();
 	cout << endl;
 	system("pause");
 	system("CLS");
 	cout << "8. NIC (na kazdej kosci inna liczba oczek, niewystepujacych po kolei):\n";
-	kosc1();
-	kosc2();
-	kosc3();
-	kosc5();
-	kosc6();
+	dice1();
+	dice2();
+	dice3();
+	dice5();
+	dice6();
 	cout << endl;
 	system("pause");
 	system("CLS");
@@ -582,24 +580,24 @@ int game::startPoker(player& P)
 	money(P);
 	cout << "Portfel: " << wallet << endl;
 	srand(time(NULL));
-	int gracz[5];
+	int pokerPlayer[5];
 	int bot[5];
-	int stake, runda = 1, gracz_reka, bot_reka;
-	int gracz_pkt = 0, bot_pkt = 0;
+	int stake, round = 1, playerHand, botHand;
+	int playerPoints = 0, botPoints = 0;
 
 	cout << "Czy chcesz wyswietlic zasady?(t/n) ";
-	char czy_zasady;
-	czy_zasady = getchar();
-	if (czy_zasady == 't') {
+	char wannaPokerRules;
+	wannaPokerRules = getchar();
+	if (wannaPokerRules == 't') {
 		system("CLS");
 		zasady();
 	}
 	system("CLS");
 
 	cout << "Czy chcesz zagrac?(t/n) ";
-	char czy_zagrac;
-	cin >> czy_zagrac;
-	if (czy_zagrac == 'n') {
+	char wannaPlayPoker;
+	cin >> wannaPlayPoker;
+	if (wannaPlayPoker == 'n') {
 		return 0;
 	}
 	system("CLS");
@@ -610,30 +608,30 @@ int game::startPoker(player& P)
 	cout << "Stawka: $" << stake << endl << endl;
 	system("pause");
 
-	while (gracz_pkt != 2 && bot_pkt != 2) {
+	while (playerPoints != 2 && botPoints != 2) {
 		system("CLS");
-		cout << "RUNDA " << runda << ".\n\n";
+		cout << "RUNDA " << round << ".\n\n";
 		system("pause");
 		system("CLS");
 
 		for (int i = 0; i < 5; i++) {
-			gracz[i] = draw();
+			pokerPlayer[i] = draw();
 			bot[i] = draw();
 		}
 
 		cout << "Wylosowano:\n";
 		for (int i = 0; i < 5; i++) {
 			Sleep(500);
-			rzut(gracz[i]);
+			diceThrow(pokerPlayer[i]);
 		}
 
 		cout << "\nCzy chcesz ponownie rzucic 1 lub 2 koscmi?(t/n) ";
-		char czy;
-		cin >> czy;
-		if (czy == 'n') {
+		char anotherThrow;
+		cin >> anotherThrow;
+		if (anotherThrow == 'n') {
 			cout << "\nNie zmieniasz rzutu\n";
 		}
-		else if (czy == 't') {
+		else if (anotherThrow == 't') {
 			int a = 0, b = 0;
 			cout << "\nPodaj numer(y) kosci(w przypadku tylko jednej wpisz numer drugiej jako 0, kazdorazowo zatwierdzajac enterem) do ponownego rzutu:\n";
 			cin >> a >> b;
@@ -643,18 +641,18 @@ int game::startPoker(player& P)
 			else {
 				system("CLS");
 				if (a != 0) {
-					gracz[a - 1] = draw();
+					pokerPlayer[a - 1] = draw();
 					Sleep(1000);
 					cout << "Ponowny rzut koscia " << a << ".:\n";
 					Sleep(1000);
-					rzut(gracz[a - 1]);
+					diceThrow(pokerPlayer[a - 1]);
 				}
 				if (b != 0) {
-					gracz[b - 1] = draw();
+					pokerPlayer[b - 1] = draw();
 					Sleep(1000);
 					cout << "\nPonowny rzut koscia " << b << ".:\n";
 					Sleep(1000);
-					rzut(gracz[b - 1]);
+					diceThrow(pokerPlayer[b - 1]);
 				}
 				cout << endl;
 				system("pause");
@@ -662,12 +660,12 @@ int game::startPoker(player& P)
 				cout << "Aktualne zestawienie kosci:\n";
 				for (int i = 0; i < 5; i++) {
 					Sleep(500);
-					rzut(gracz[i]);
+					diceThrow(pokerPlayer[i]);
 				}
 			}
 		}
 
-		gracz_reka = uklad(gracz);
+		playerHand = diceLayout(pokerPlayer);
 
 		cout << endl;
 		system("pause");
@@ -675,45 +673,45 @@ int game::startPoker(player& P)
 		cout << "Przeciwnik wylosowal:\n";
 		for (int i = 0; i < 5; i++) {
 			Sleep(500);
-			rzut(bot[i]);
+			diceThrow(bot[i]);
 		}
-		bot_reka = uklad(bot);
+		botHand = diceLayout(bot);
 
 		cout << endl;
 		system("pause");
 		system("CLS");
 
 		cout << "Twoj uklad: ";
-		nazwa(gracz_reka);
+		diceResult(playerHand);
 		cout << "\n\n\nUklad przeciwnika: ";
-		nazwa(bot_reka);
+		diceResult(botHand);
 
-		if (gracz_reka > bot_reka) {
-			gracz_pkt++;
-			cout << "\n\n\nWYGRANA! Wynik: " << gracz_pkt << " : " << bot_pkt;
+		if (playerHand > botHand) {
+			playerPoints++;
+			cout << "\n\n\nWYGRANA! Wynik: " << playerPoints << " : " << botPoints;
 		}
-		else if (gracz_reka < bot_reka) {
-			bot_pkt++;
-			cout << "\n\n\nPRZEGRANA! Wynik: " << gracz_pkt << " : " << bot_pkt;
+		else if (playerHand < botHand) {
+			botPoints++;
+			cout << "\n\n\nPRZEGRANA! Wynik: " << playerPoints << " : " << botPoints;
 		}
-		else if (gracz_reka == bot_reka) {
-			cout << "\n\n\nREMIS! Wynik: " << gracz_pkt << " : " << bot_pkt;
+		else if (playerHand == botHand) {
+			cout << "\n\n\nREMIS! Wynik: " << playerPoints << " : " << botPoints;
 		}
 		cout << endl << endl;
 		system("pause");
-		runda++;
+		round++;
 	}
 
 	system("CLS");
-	if (gracz_pkt == 2) {
+	if (playerPoints == 2) {
 		wallet = wallet + stake * (2 + P.multiplier);
 		P.updatePlayer();
 		P.updateWallet(wallet);
-		cout << "Koniec gry. Wygrywasz $" << wallet;
+		cout << "Koniec gry. Wygrywasz i posiadasz $" << wallet;
 	}
-	if (bot_pkt == 2) {
+	if (botPoints == 2) {
 		wallet = wallet - stake * P.multiplier;
-		cout << "Koniec gry. Przegrywasz $" << wallet;
+		cout << "Koniec gry. Przegrywasz i posiadasz $" << wallet;
 		P.updateWallet(wallet);
 	}
 	cout << endl << endl;
@@ -721,7 +719,7 @@ int game::startPoker(player& P)
 }
 
 /* Roulette */
-void game::rules()
+void game::rouletteRules()
 {
 	system("cls");
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -739,7 +737,7 @@ void game::rules()
 	SetConsoleTextAttribute(hConsole, 7);
 }
 
-void game::thanks(int& x, player& P)
+void game::thanksForGame(int& x, player& P)
 {
 	cout << "\n===============================================================================================\n";
 	if (P.updateWallet(x) == true)
@@ -772,18 +770,14 @@ int game::startRoulette(player& P)
 	int numberOrColor;
 	char choice;
 
-
-
 	srand(time(NULL));
-
-
 
 	do
 	{
 		system("cls");
 		money(P);
 
-		rules();
+		rouletteRules();
 		sizeOfBet(bet, wallet);
 
 		cout << "\nWybierz typ zakladu:\n[1] Postaw na liczbe\n[2] Postaw na kolor\n[3] Wyjscie \nWybor: ";
@@ -801,7 +795,7 @@ int game::startRoulette(player& P)
 			do
 			{
 				system("cls");
-				rules();
+				rouletteRules();
 				cout << "\nPostaw na liczbe od 0 do 36 :";
 				cin >> guess;
 				if (guess <= 0 || guess > 36)
@@ -845,12 +839,12 @@ int game::startRoulette(player& P)
 			do
 			{
 				system("cls");
-				rules();
+				rouletteRules();
 				cout << "\nPostaw na kolor: czerwony(nieparzyste), czarny(parzyste) lub zielony(0): \n[1] Czerwony\n[2] Czarny\n[3] Zielony\nWybor: ";
 				cin >> guess;
 				if (guess <= 0 || guess > 3)
 					cout << "\nWprowadz poprawny wybor\n"
-					<< "\nPostaw na poprawna liczbe: ";
+						 << "\nPostaw na poprawna liczbe: ";
 			} while (guess <= 0 || guess > 3);
 			system("cls");
 			initDraw();
@@ -914,7 +908,7 @@ int game::startRoulette(player& P)
 			//wyjscie
 
 		case 3:
-			thanks(wallet, P);
+			thanksForGame(wallet, P);
 			system("pause");
 			return 0;
 			break;
@@ -926,7 +920,7 @@ int game::startRoulette(player& P)
 		cin >> choice;
 	} while (choice == 't' || choice == 'T');
 
-	thanks(wallet, P);
+	thanksForGame(wallet, P);
 	system("pause");
 }
 
@@ -1209,7 +1203,7 @@ void game::startSlotMachine(player& P)
 {
 	srand(time(NULL));
 	char choice;
-	int a, b, c;
+	int a, b, c;// 3 losowane ikony od lewej
 	int tab[3];
 	money(P);
 	cout << "Portfel: " << wallet << endl;
@@ -1294,7 +1288,7 @@ void game::startSlotMachine(player& P)
 		cin >> choice;
 	} while (choice == 't' || choice == 'T');
 
-	thanks(wallet, P);
+	thanksForGame(wallet, P);
 
 	system("pause");
 }
@@ -1509,11 +1503,11 @@ void game::manipulation(player& P, settings& S)
 {
 	system("CLS");
 	cout << "========================================\n"
-		"1.Sterowanie za pomoca klawiszy WASD\n"
-		"2.Sterowanie za pomoca strzalek\n"
-		"3.Wroc\n"
-		"========================================\n"
-		"\nWybor:";
+			"1.Sterowanie za pomoca klawiszy WASD\n"
+			"2.Sterowanie za pomoca strzalek\n"
+			"3.Wroc\n"
+			"========================================\n"
+			"\nWybor:";
 	int x;
 	cin >> x;
 	switch (x) {

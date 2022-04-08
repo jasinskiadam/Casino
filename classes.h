@@ -57,22 +57,22 @@ public:
 	void money(player& obj);
 
 	/* Poker */
-	void kosc1();
-	void kosc2();
-	void kosc3();
-	void kosc4();
-	void kosc5();
-	void kosc6();
+	void dice1();
+	void dice2();
+	void dice3();
+	void dice4();
+	void dice5();
+	void dice6();
 	int draw();
-	void rzut(int);
-	int uklad(int[]);
+	void diceThrow(int);
+	int diceLayout(int[]);
 	void zasady();
-	void nazwa(int);
+	void diceResult(int);
 	int startPoker(player& P);
 
 	/* Ruletka */
-	void rules();
-	void thanks(int& x, player& P);
+	void rouletteRules();
+	void thanksForGame(int& x, player& P);
 	void sizeOfBet(int& x, int& y);
 	int startRoulette(player& P);
 	void displayRoulette(int winNumber);

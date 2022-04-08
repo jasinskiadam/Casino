@@ -7,7 +7,7 @@
 #include<cmath>
 using namespace std;
 
-void wczytaj(player& P, settings& S, view& map, game& GameHub);
+void loadGame(player& P, settings& S, view& map, game& GameHub);
 
 struct saves {
 	int index;
@@ -32,9 +32,9 @@ int main()
 	int choice;
 	system("CLS");
 	cout << "1.Nowa gra\n"
-		"2.Wczytaj gre\n"
-		"3.Wyjdz\n"
-		"\nwybor:";
+			"2.Wczytaj gre\n"
+			"3.Wyjdz\n"
+			"\nwybor:";
 	cin >> choice;
 	switch (choice) {
 	case 1:
@@ -54,7 +54,7 @@ int main()
 		break;
 
 	case 2:
-		wczytaj(p1, config, map, GameHub);
+		loadGame(p1, config, map, GameHub);
 		break;
 
 	case 3:
@@ -70,7 +70,7 @@ int main()
 	}
 }
 
-void wczytaj(player& P, settings& S, view& map, game& GameHub) {
+void loadGame(player& P, settings& S, view& map, game& GameHub) {
 	system("cls");
 	int index = 0;
 	fstream file("savedGames.txt", ios::in);
@@ -143,9 +143,8 @@ void wczytaj(player& P, settings& S, view& map, game& GameHub) {
 		break;
 
 	default:
-		wczytaj(P, S, map, GameHub);
+		loadGame(P, S, map, GameHub);
 		break;
-
 	}
 
 	map.init(GameHub, P);
