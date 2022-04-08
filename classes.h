@@ -22,13 +22,13 @@ class player
 	*/
 public:
 	float multiplier;
-	int wallet1;
+	int currentWallet;
 	int winNumber;
 	int level;
 	string name;
 	player(int wallet, string name, float multiplier, int level, int winNumber)
 	{
-		this->wallet1 = wallet;
+		this->currentWallet = wallet;
 		this->name = name;
 		this->multiplier = multiplier;
 		this->level = level;

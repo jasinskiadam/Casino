@@ -72,7 +72,7 @@ int view::checkMovePlayer(char direction)
 void view::bye(player& P)
 {
 	cout << "\n===============================================================================================\n";
-	cout << "Dzieki za gre, wychodzisz dzis z saldem " << P.wallet1 << "$";
+	cout << "Dzieki za gre, wychodzisz dzis z saldem " << P.currentWallet << "$";
 	cout << "\n===============================================================================================\n";
 }
 
@@ -227,7 +227,7 @@ void view::displayMap(game& GameList, player& P)
 
 	cout << endl << endl << endl << endl;
 	cout << " Gracz: " << P.name << endl << endl;
-	cout << " Portfel: " << P.wallet1 << "\t Level: " << P.level << endl;
+	cout << " Portfel: " << P.currentWallet << "\t Level: " << P.level << endl;
 	for (int x = 0; x < widthMap + 18; x++)
 	{
 		cout << "--";
@@ -341,15 +341,15 @@ void view::updateMap(game GameList, player& P, settings& S)
 /*Player*/
 bool player::updateWallet(int wallet)
 {
-	if (wallet1 = wallet) return true;
+	if (currentWallet = wallet) return true;
 	else return false;
 }
 
 bool player::checkWallet(int cost)
 {
-	if (wallet1 >= cost)
+	if (currentWallet >= cost)
 	{
-		wallet1 -= cost;
+		currentWallet -= cost;
 		return true;
 	}
 	else
@@ -371,7 +371,7 @@ void player::updatePlayer()
 /*Game*/
 void game::money(player& obj)
 {
-	wallet = obj.wallet1;
+	wallet = obj.currentWallet;
 }
 
 /* Poker */
@@ -1478,7 +1478,7 @@ void game::startBet(player& P)
 					cout << "trzeci mecz trafiony!\n";
 					cout << "WYGRANA\n";
 					cout << "wygrywasz $" << stake * 8;
-					P.wallet1 += stake * 8;
+					P.currentWallet += stake * 8;
 				}
 				else if (winorlose == 0) {
 					cout << "trzeci mecz nietrafiony!\n";
@@ -1550,7 +1550,7 @@ void game::save(player& P, settings& S)
 		cout << "\r";
 	}
 	fstream file("savedGames.txt", ios::app);
-	if (file << nameSaved << " " << P.name << " " << P.wallet1 << " " << P.level << " " << P.multiplier << " " << P.winNumber << " " << S.controlMode << endl) cout << "\nGra zostala zapisana!\n\n";
+	if (file << nameSaved << " " << P.name << " " << P.currentWallet << " " << P.level << " " << P.multiplier << " " << P.winNumber << " " << S.controlMode << endl) cout << "\nGra zostala zapisana!\n\n";
 	else cout << "\n Wystapil problem z zapisem gry :C \n\n";
 	file.close();
 

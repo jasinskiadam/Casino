@@ -113,7 +113,7 @@ void wczytaj(player& P, settings& S, view& map, game& GameHub) {
 	switch (choice) {
 	case 1:
 		P.name = arrSaves[0].name;
-		P.wallet1 = arrSaves[0].wallet;
+		P.currentWallet = arrSaves[0].wallet;
 		P.level = arrSaves[0].level;
 		P.multiplier = arrSaves[0].multiplier;
 		P.winNumber = arrSaves[0].winNumber;
@@ -122,7 +122,7 @@ void wczytaj(player& P, settings& S, view& map, game& GameHub) {
 
 	case 2:
 		P.name = arrSaves[1].name;
-		P.wallet1 = arrSaves[1].wallet;
+		P.currentWallet = arrSaves[1].wallet;
 		P.level = arrSaves[1].level;
 		P.multiplier = arrSaves[1].multiplier;
 		P.winNumber = arrSaves[1].winNumber;
@@ -131,7 +131,7 @@ void wczytaj(player& P, settings& S, view& map, game& GameHub) {
 
 	case 3:
 		P.name = arrSaves[2].name;
-		P.wallet1 = arrSaves[2].wallet;
+		P.currentWallet = arrSaves[2].wallet;
 		P.level = arrSaves[2].level;
 		P.multiplier = arrSaves[2].multiplier;
 		P.winNumber = arrSaves[2].winNumber;
